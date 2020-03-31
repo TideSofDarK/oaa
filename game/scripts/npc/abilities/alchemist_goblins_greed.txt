@@ -10,6 +10,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "5368"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_PASSIVE"
+
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
     "LevelsBetweenUpgrades"                               "2"
@@ -21,7 +22,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "duration"                                        "30"
+        "duration"                                        "40"
       }
       "02"
       {
@@ -31,17 +32,17 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_bonus_gold"                                "4"
+        "bonus_bonus_gold"                                "3 4 5 6 12 48" //OAA
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_gold_cap"                                  "16 20 24 28 56 84"
+        "bonus_gold_cap"                                  "999999"  //OAA
       }
       "05"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bounty_multiplier_tooltip"                       "2.5"
+        "bounty_multiplier"                               "2.0 2.5 3.0 3.5 5 10"
       }
     }
   }

@@ -84,7 +84,7 @@ local function SafeTeleportAll(mainUnit, location, maxDistance)
                                             false)
   playerAdditionalUnits = playerAdditionalUnits or {} -- assign empty table instead of nil so iter can be called without errors
   playerAdditionalUnits = iter(playerAdditionalUnits):filter(function (unit)
-    return unit:GetPlayerOwnerID() == mainUnit:GetPlayerOwnerID()
+    return unit:GetPlayerOwnerID() == mainUnit:GetPlayerOwnerID() and (not unit:IsCourier())
   end)
   -- end
 
@@ -101,7 +101,7 @@ local function TestSafeTeleport(keys)
   SafeTeleportAll(hero, Vector(0, 0, 0), 150)
 end
 
-ChatCommand:LinkCommand("-test_tp", TestSafeTeleport, nil)
+ChatCommand:LinkDevCommand("-test_tp", TestSafeTeleport, nil)
 export.SafeTeleport = SafeTeleport
 export.SafeTeleportAll = SafeTeleportAll
 

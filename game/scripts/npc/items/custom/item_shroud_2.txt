@@ -24,8 +24,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_shroud;item_upgrade_core_2"
-      "02"                                                "item_shroud;item_upgrade_core_3"
-      "03"                                                "item_shroud;item_upgrade_core_4"
     }
   }
 
@@ -55,7 +53,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "8350"
+    "ItemCost"                                            "8450"
     "ItemShopTags"                                        "int;agi;str;hard_to_tag"
     "ItemQuality"                                         "component"
     "ItemAliases"                                         "shroud of Shadows 2;sos 2"

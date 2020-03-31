@@ -9,7 +9,7 @@
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "213"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "Model"                                               "models/props_gameplay/recipe.mdl"
-    "AbilityTextureName"                                  "custom/recipe/recipe_farming_1"
+    "AbilityTextureName"                                  "custom/recipe/recipe_1"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "1050"
+    "ItemCost"                                            "975"
     "ItemShopTags"                                        "move_speed;regen_health;armor"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "tranquil boots"
@@ -60,7 +60,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "90"
+        "bonus_movement_speed"                            "26"
       }
       "02"
       {
@@ -70,7 +70,7 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_health_regen"                              "13"
+        "bonus_health_regen"                              "14"
       }
       "04"
       {
@@ -105,7 +105,7 @@
       "10"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "broken_movement_speed"                           "65"
+        "broken_movement_speed"                           "18"
       }
     }
   }

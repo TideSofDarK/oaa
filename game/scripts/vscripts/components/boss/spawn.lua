@@ -17,7 +17,8 @@ if BossSpawner == nil then
 end
 
 function BossSpawner:Init ()
-  Timers:CreateTimer(BOSS_RESPAWN_START, Dynamic_Wrap(BossSpawner, 'SpawnAllBosses'))
+  HudTimer:At(BOSS_RESPAWN_START, Dynamic_Wrap(BossSpawner, 'SpawnAllBosses'))
+  ChatCommand:LinkDevCommand("-spawnbosses", Dynamic_Wrap(self, 'SpawnAllBosses'), self)
 
   local allGoodPlayers = {}
   local allBadPlayers = {}
@@ -48,6 +49,52 @@ function BossSpawner:Init ()
     margin = 300,
     players = allBadPlayers
   })
+
+  local bossPits = Entities:FindAllByName('boss_pit')
+
+  for _,bossPit in ipairs(bossPits) do
+    bossPit.killCount = 1 -- 1 index because lua is that person from the internet who doesn't look like their pictures
+  end
+
+  self.hasKilledTiers = {
+    [1] = false,
+    [2] = false,
+    [3] = false,
+    [4] = false,
+    [5] = false,
+    [6] = true,
+    [7] = true,
+  }
+end
+
+function BossSpawner:GetState ()
+  local state = {}
+  local bossPits = Entities:FindAllByName('boss_pit')
+
+  for _,bossPit in ipairs(bossPits) do
+    state[self:PitID(bossPit)] = bossPit.killCount
+  end
+
+  state.hasKilledTiers = self.hasKilledTiers
+
+  return state
+end
+
+function BossSpawner:LoadState (state)
+  local bossPits = Entities:FindAllByName('boss_pit')
+
+  for _,bossPit in ipairs(bossPits) do
+    bossPit.killCount = state[self:PitID(bossPit)]
+  end
+
+  self.hasKilledTiers = state.hasKilledTiers
+
+  BossSpawner:SpawnAllBosses()
+end
+
+function BossSpawner:PitID (pit)
+  local origin = pit:GetAbsOrigin()
+  return origin.x .. '/' .. origin.y .. '/' .. origin.z
 end
 
 function BossSpawner:SpawnAllBosses ()
@@ -59,8 +106,9 @@ function BossSpawner:SpawnAllBosses ()
   local bossPits = Entities:FindAllByName('boss_pit')
 
   for _,bossPit in ipairs(bossPits) do
-    bossPit.killCount = 1 -- 1 index because lua is that person from the internet who doesn't look like their pictures
-    BossSpawner:SpawnBossAtPit(bossPit)
+    Timers:CreateTimer(_ / 10, function ()
+      BossSpawner:SpawnBossAtPit(bossPit)
+    end)
   end
 end
 
@@ -80,7 +128,7 @@ function BossSpawner:SpawnBossAtPit (pit)
     -- DebugPrint('There are ' .. #bossName .. 'options for this boss')
     bossName = bossName[RandomInt(1, #bossName)]
   end
-  local isProtected = bossList == 1 and pit.killCount == 1
+  local isProtected = false --bossList == 1 and pit.killCount == 1
 
   DebugPrint('Spawning ' .. bossName .. ' with protection ' .. tostring(isProtected))
   BossSpawner:SpawnBoss(pit, bossName, bossTier, isProtected)
@@ -113,9 +161,9 @@ function BossSpawner:SpawnBoss (pit, boss, bossTier, isProtected)
     return
   end
 
-  local heart = CreateItem("item_heart", bossHandle, bossHandle)
+  --local heart = CreateItem("item_heart", bossHandle, bossHandle)
 
-  bossHandle:AddItem(heart)
+  --bossHandle:AddItem(heart)
 
   --Adding cores to the bosses inventory
   local core = CreateItem(BossSpawner.CoreItems[bossTier], bossHandle, bossHandle)
@@ -141,11 +189,15 @@ function BossSpawner:SpawnBoss (pit, boss, bossTier, isProtected)
 
   Minimap:SpawnBossIcon(pit, bossTier)
 
-  local newBossTier = math.min(6, bossTier + 1)
+  local newBossTier = math.min(5, bossTier + 1)
 
   bossAI.onDeath(function ()
     DebugPrint('Boss has died ' .. pit.killCount .. ' times')
     pit.killCount = pit.killCount + 1
+    if not self.hasKilledTiers[bossTier] then
+      self.hasKilledTiers[bossTier] = true
+      PointsManager:IncreaseLimit(KILL_LIMIT_INCREASE)
+    end
     Timers:CreateTimer(BOSS_RESPAWN_TIMER, function()
       BossSpawner:SpawnBossAtPit(pit, bossTier)
     end)

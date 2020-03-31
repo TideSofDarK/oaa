@@ -13,18 +13,19 @@
     "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES_STRONG"
     "FightRecapLevel"                                     "1"
+
     "MaxLevel"                                            "6"
+
     "AbilityCastRange"                                    "625"
-    "AbilityCastPoint"                                    "0.45 0.45 0.45 0.45 0.45 0.45"
+    "AbilityCastPoint"                                    "0.45"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "7.0 7.0 7.0 7.0 7.0 7.0"
-    "AbilityDuration"                                     "1.6 1.9 2.2 2.5 2.8 3.1"
+    "AbilityCooldown"                                     "7.0"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "100 110 120 130 160 200"
+    "AbilityManaCost"                                     "100 110 120 130 195 325"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -49,9 +50,9 @@
       }
       "04"
       {
-        "var_type"          "FIELD_INTEGER"
-        "light_strike_array_damage" "80 120 160 200 400 600"
-        "LinkedSpecialBonus"    "special_bonus_unique_lina_3"
+        "var_type"                                        "FIELD_INTEGER"
+        "light_strike_array_damage"                       "80 120 160 200 500 800"
+        "LinkedSpecialBonus"                              "special_bonus_unique_lina_3"
       }
     }
   }

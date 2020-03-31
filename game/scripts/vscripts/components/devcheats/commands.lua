@@ -4,25 +4,26 @@
 DevCheats = class({})
 
 function DevCheats:Init()
-  ChatCommand:LinkCommand("-help", Dynamic_Wrap(DevCheats, "Help"), self)
-  ChatCommand:LinkCommand("-list", Dynamic_Wrap(DevCheats, "Help"), self)
-  ChatCommand:LinkCommand("-print_modifiers", Dynamic_Wrap(DevCheats, "PrintModifiers"), self)
-  ChatCommand:LinkCommand("-addbots", Dynamic_Wrap(DevCheats, "AddBots"), self)
-  ChatCommand:LinkCommand("-nofog", Dynamic_Wrap(DevCheats, "DisableFog"), self)
-  ChatCommand:LinkCommand("-fog", Dynamic_Wrap(DevCheats, "EnableFog"), self)
-  ChatCommand:LinkCommand("-fixspawn", Dynamic_Wrap(DevCheats, "TeleportHeroesToFountain"), self)
-  ChatCommand:LinkCommand("-getpos", Dynamic_Wrap(DevCheats, "PrintPosition"), self)
-  ChatCommand:LinkCommand("-god", Dynamic_Wrap(DevCheats, "GodMode"), self)
-  ChatCommand:LinkCommand("-disarm", Dynamic_Wrap(DevCheats, "ToggleDisarm"), self)
-  ChatCommand:LinkCommand("-dagger", Dynamic_Wrap(DevCheats, "GiveDevDagger"), self)
-  ChatCommand:LinkCommand("-core", Dynamic_Wrap(DevCheats, "GiveUpgradeCore"), self)
-  ChatCommand:LinkCommand("-addability", Dynamic_Wrap(DevCheats, "AddAbility"), self)
-  ChatCommand:LinkCommand("-give", Dynamic_Wrap(DevCheats, "GiveLevelledItem"), self)
-  ChatCommand:LinkCommand("-loadout", Dynamic_Wrap(DevCheats, "GiveLoadout"), self)
-  ChatCommand:LinkCommand("-scepter", Dynamic_Wrap(DevCheats, "GiveUltimateScepter"), self)
-  ChatCommand:LinkCommand("-dagon", Dynamic_Wrap(DevCheats, "GiveDevDagon"), self)
-  ChatCommand:LinkCommand("-switchhero", Dynamic_Wrap(DevCheats, "SwitchHero"), self)
-  ChatCommand:LinkCommand("-lazer", Dynamic_Wrap(DevCheats, "AddDevAttack"), self)
+  ChatCommand:LinkDevCommand("-help", Dynamic_Wrap(DevCheats, "Help"), self)
+  ChatCommand:LinkDevCommand("-list", Dynamic_Wrap(DevCheats, "Help"), self)
+  ChatCommand:LinkDevCommand("-print_modifiers", Dynamic_Wrap(DevCheats, "PrintModifiers"), self)
+  ChatCommand:LinkDevCommand("-addbots", Dynamic_Wrap(DevCheats, "AddBots"), self)
+  ChatCommand:LinkDevCommand("-nofog", Dynamic_Wrap(DevCheats, "DisableFog"), self)
+  ChatCommand:LinkDevCommand("-fog", Dynamic_Wrap(DevCheats, "EnableFog"), self)
+  ChatCommand:LinkDevCommand("-fixspawn", Dynamic_Wrap(DevCheats, "TeleportHeroesToFountain"), self)
+  ChatCommand:LinkDevCommand("-getpos", Dynamic_Wrap(DevCheats, "PrintPosition"), self)
+  ChatCommand:LinkDevCommand("-god", Dynamic_Wrap(DevCheats, "GodMode"), self)
+  ChatCommand:LinkDevCommand("-disarm", Dynamic_Wrap(DevCheats, "ToggleDisarm"), self)
+  ChatCommand:LinkDevCommand("-dagger", Dynamic_Wrap(DevCheats, "GiveDevDagger"), self)
+  ChatCommand:LinkDevCommand("-core", Dynamic_Wrap(DevCheats, "GiveUpgradeCore"), self)
+  ChatCommand:LinkDevCommand("-addability", Dynamic_Wrap(DevCheats, "AddAbility"), self)
+  ChatCommand:LinkDevCommand("-give", Dynamic_Wrap(DevCheats, "GiveLevelledItem"), self)
+  ChatCommand:LinkDevCommand("-loadout", Dynamic_Wrap(DevCheats, "GiveLoadout"), self)
+  ChatCommand:LinkDevCommand("-scepter", Dynamic_Wrap(DevCheats, "GiveUltimateScepter"), self)
+  ChatCommand:LinkDevCommand("-dagon", Dynamic_Wrap(DevCheats, "GiveDevDagon"), self)
+  ChatCommand:LinkDevCommand("-switchhero", Dynamic_Wrap(DevCheats, "SwitchHero"), self)
+  ChatCommand:LinkDevCommand("-lazer", Dynamic_Wrap(DevCheats, "AddDevAttack"), self)
+  ChatCommand:LinkDevCommand("-lvlup", Dynamic_Wrap(DevCheats, "LevelUp"), self)
 end
 
 -- Print all modifiers on player's hero to console
@@ -50,7 +51,7 @@ end
 function DevCheats:AddBots(keys)
   local numPlayers = PlayerResource:GetPlayerCount()
 
-  PlayerResource:RandomHeroForPlayersWithoutHero()
+  --PlayerResource:RandomHeroForPlayersWithoutHero()
 
   -- Eanble bots and fill empty slots
   if IsServer() and GameRules:GetMaxTeamPlayers() - numPlayers > 0 then
@@ -276,4 +277,32 @@ function DevCheats:SwitchHero(keys)
   else
     GameRules:SendCustomMessage("Usage is -switchhero X, where X is the name of the hero to switch to", 0, 0)
   end
+end
+
+function DevCheats:LevelUp(keys)
+  local text = string.lower(keys.text)
+  local splitted = split(text, " ")
+  local number = false
+  if #splitted > 0 then
+    number = tonumber(splitted[1])
+  end
+
+  if not number then
+    number = 1
+  end
+
+  local playerID = keys.playerid
+  local hero = PlayerResource:GetSelectedHeroEntity(keys.playerid)
+
+  local desiredLevel = math.min(50, hero:GetLevel() + number)
+
+  Timers:CreateTimer(function()
+    while hero:GetLevel() < desiredLevel do
+      if XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] < hero:GetCurrentXP() then
+        print('Level was totally wrong ' .. tostring(hero:GetCurrentXP()) .. ' > ' .. tostring(XP_PER_LEVEL_TABLE[hero:GetLevel() + 1]))
+        return
+      end
+      hero:AddExperience(XP_PER_LEVEL_TABLE[hero:GetLevel() + 1] - hero:GetCurrentXP(), DOTA_ModifyXP_Unspecified, false, false)
+    end
+  end)
 end

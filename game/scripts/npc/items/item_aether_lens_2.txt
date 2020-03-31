@@ -18,9 +18,6 @@
     "ItemRequirements"
     {
       "01"                                                "item_aether_lens;item_upgrade_core"
-      "02"                                                "item_aether_lens;item_upgrade_core_2"
-      "03"                                                "item_aether_lens;item_upgrade_core_3"
-      "04"                                                "item_aether_lens;item_upgrade_core_4"
     }
   }
 
@@ -38,7 +35,7 @@
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "3850"
+    "ItemCost"                                            "3825"
     "ItemShopTags"                                        "int;regen_mana;move_speed;hard_to_tag"
     "ItemQuality"                                         "rare"
     "ItemAliases"                                         "aether lens 2"
@@ -56,17 +53,17 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_mana"                                      "450 1000 2200 3800 5600"
+        "bonus_mana"                                      "450 900 1450 2000 2650"
       }
       "02"
       {
         "var_type"        "FIELD_FLOAT"
-        "bonus_mana_regen"    "1.25 3.75 6.25 8.75 11.25"
+        "bonus_mana_regen"    "3.0 6.0 12.0 18.0 24.0"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "cast_range_bonus"                                "250 325 425 550 700"
+        "cast_range_bonus"                                "250 325 400 475 550"
       }
     }
   }

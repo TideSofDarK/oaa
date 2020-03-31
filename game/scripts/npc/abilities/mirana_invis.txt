@@ -12,19 +12,21 @@
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_NO"
     "FightRecapLevel"                                     "2"
+
     "MaxLevel"                                            "5"
+
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "0"
-    "AbilityCastPoint"                                    "0.5 0.5 0.5"
+    "AbilityCastPoint"                                    "0.5"
 
-    // Time    
+    // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "140.0 120.0 100.0 90.0 80.0"
+    "AbilityCooldown"                                     "100.0" //OAA
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "75"
+    "AbilityManaCost"                                     "125"
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -38,7 +40,12 @@
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "duration"                                        "15.0"
+        "duration"                                        "18.0"
+      }
+      "03"
+      {
+        "var_type"                                        "FIELD_INTEGER"
+        "bonus_movement_speed"                            "15"
       }
     }
   }

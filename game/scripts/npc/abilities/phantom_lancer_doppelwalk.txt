@@ -8,7 +8,7 @@
     // General
     //-------------------------------------------------------------------------------------------------------------
     "ID"                                                  "5066"                            // unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
-    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+    "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
     "FightRecapLevel"                                     "1"
     "MaxLevel"                                            "6"
     // Casting
@@ -16,10 +16,10 @@
     "AbilityCastRange"                                    "600 600 600 600 800 1000"
     "AbilityCastPoint"                                    "0.1"
 
-    // Time    
+    // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "25 20 15 10 10 10"
-    
+    "AbilityCooldown"                                     "24 21 18 15 15 15" //OAA
+
     // Cost
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "50"
@@ -32,21 +32,25 @@
       {
         "var_type"                                        "FIELD_INTEGER"
         "illusion_1_damage_out_pct"                       "-100"
+        "CalculateSpellDamageTooltip"                     "0"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
         "illusion_1_damage_in_pct"                        "0"
+        "CalculateSpellDamageTooltip"                     "0"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "illusion_2_damage_out_pct"                       "-80"
+        "illusion_2_damage_out_pct"                       "-50" //OAA
+        "CalculateSpellDamageTooltip"                     "0"
       }
       "04"
       {
         "var_type"                                        "FIELD_INTEGER"
         "illusion_2_damage_in_pct"                        "500"
+        "CalculateSpellDamageTooltip"                     "0"
       }
       "05"
       {
@@ -62,7 +66,7 @@
       {
         "var_type"                                        "FIELD_FLOAT"
         "delay"                                           "1"
-      }      
+      }
       "08"
       {
         "var_type"                                        "FIELD_FLOAT"
@@ -70,8 +74,8 @@
       }
       "09"
       {
-        "var_type"          "FIELD_FLOAT"
-        "illusion_extended_duration"      "2"
+        "var_type"                                        "FIELD_FLOAT"
+        "illusion_extended_duration"                      "1" //OAA
       }
       "10"	//OAA
       {

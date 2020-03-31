@@ -19,7 +19,7 @@ function Music:Init ()
   CustomNetTables:SetTableValue('music', 'mute', muteTable)
   --to recompile all music
 
-  ChatCommand:LinkCommand("-compile_music", Dynamic_Wrap(Music, "Recompile"), Music)
+  ChatCommand:LinkDevCommand("-compile_music", Dynamic_Wrap(Music, "Recompile"), Music)
   -- register mute button receiver
   CustomGameEventManager:RegisterListener("music_mute", Dynamic_Wrap(self, "MuteHandler"))
   -- Start first song
@@ -92,7 +92,7 @@ end
 
 -- Receives mute requests
 function Music:MuteHandler(keys)
-  local playerID = keys.playerID
+  local playerID = keys.PlayerID
   DebugPrintTable(keys)
   --sets his state
   local muteTable = CustomNetTables:GetTableValue('music', 'mute')

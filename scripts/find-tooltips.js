@@ -23,7 +23,8 @@ if (require.main === module) {
 
 function findMissingTooltips (cb) {
   request.get({
-    url: 'https://raw.githubusercontent.com/SteamDatabase/GameTracking-Dota2/master/game/dota/resource/dota_english.txt'
+    // url: 'https://raw.githubusercontent.com/SteamDatabase/GameTracking-Dota2/master/game/dota/resource/dota_english.txt'
+    url: 'https://raw.githubusercontent.com/SteamDatabase/GameTracking-Dota2/master/game/dota/pak01_dir/resource/localization/abilities_english.txt'
   }, function (err, dotaEnglish) {
     var done = after(3, function (err) {
       cb(err, result);
@@ -48,7 +49,11 @@ function findMissingTooltips (cb) {
       }
       data.map(function (name) {
         if (translations.indexOf(name) === -1) {
-          console.log(name, 'is missing a title', Array(45 - name.length).join(' '), '- Add the key: "' + name + '"');
+          if (name.length < 45) {
+            console.log(name, 'is missing a title', Array(45 - name.length).join(' '), '- Add the key: "' + name + '"');
+          } else {
+            console.log(name, 'is missing a title - Add the key: "' + name + '"');
+          }
           result.push([name, name]);
         }
       });
@@ -63,19 +68,26 @@ function findMissingTooltips (cb) {
       data.map(function (name) {
         var prefix = 'DOTA_Tooltip_Ability_';
         var title = prefix + name;
-        var description = prefix + name + '_description';
+        var description = (prefix + name + '_description').toLowerCase();
 
         title = title.toLowerCase();
-        description = description.toLowerCase();
 
         if (translations.indexOf(title) === -1) {
-          console.log(name, 'is missing a title', Array(45 - name.length).join(' '), '- Add the key: "' + title + '"');
+          if (name.length < 45) {
+            console.log(name, 'is missing a title', Array(45 - name.length).join(' '), '- Add the key: "' + title + '"');
+          } else {
+            console.log(name, 'is missing a title - Add the key: "' + title + '"');
+          }
           result.push([name, title]);
         } else {
           // console.log(translations.lang.Tokens.values[title]);
         }
-        if (translations.indexOf(description) === -1) {
-          console.warn(name, 'is missing a desc', Array(46 - name.length).join(' '), '- Add the key: "' + description + '"');
+        if (translations.indexOf(description) === -1 && !name.startsWith('special_bonus_')) {
+          if (name.length < 46) {
+            console.warn(name, 'is missing a desc', Array(46 - name.length).join(' '), '- Add the key: "' + description + '"');
+          } else {
+            console.warn(name, 'is missing a desc - Add the key: "' + description + '"');
+          }
           result.push([name, description]);
         }
       });
@@ -90,27 +102,34 @@ function findMissingTooltips (cb) {
       data.map(function (name) {
         var prefix = 'DOTA_Tooltip_';
         var requiredTitle = !name.startsWith('item_recipe');
-        var requiredDescription = (name.startsWith('item_') && !name.startsWith('item_recipe'));
 
         if (name.startsWith('item_')) {
           prefix = prefix + 'Ability_';
         }
         var title = prefix + name;
-        var description = prefix + name + '_description';
+        // var requiredDescription = (name.startsWith('item_') && !name.startsWith('item_recipe'));
+        // var description = (prefix + name + '_description').toLowerCase();
 
         title = title.toLowerCase();
-        description = description.toLowerCase();
 
         if (translations.indexOf(title) === -1 && requiredTitle) {
-          console.log(name, 'is missing a title', Array(45 - name.length).join(' '), '- Add the key: "' + title + '"');
+          if (name.length < 45) {
+            console.log(name, 'is missing a title', Array(45 - name.length).join(' '), '- Add the key: "' + title + '"');
+          } else {
+            console.log(name, 'is missing a title - Add the key: "' + title + '"');
+          }
           result.push([name, title]);
         } else {
           // console.log(translations.lang.Tokens.values[title]);
         }
-        if (translations.indexOf(description) === -1 && requiredDescription) {
-          console.log(name, 'is missing a description', Array(39 - name.length).join(' '), '- Add the key: "' + description + '"');
-          result.push([name, description]);
-        }
+        // if (translations.indexOf(description) === -1 && requiredDescription) {
+        //   if (name.length < 39) {
+        //     console.log(name, 'is missing a description', Array(39 - name.length).join(' '), '- Add the key: "' + description + '"');
+        //   } else {
+        //     console.log(name, 'is missing a description - Add the key: "' + description + '"');
+        //   }
+        //   result.push([name, description]);
+        // }
       });
       done();
     });

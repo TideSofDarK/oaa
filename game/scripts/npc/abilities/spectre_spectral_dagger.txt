@@ -32,7 +32,7 @@
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "130 140 150 160 200 250"
+    "AbilityManaCost"                                     "100 120 140 160 200 250"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
@@ -50,8 +50,8 @@
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movespeed"                                 "8 12 16 20 30 45"
-        "LinkedSpecialBonus"    "special_bonus_unique_spectre_3"
+        "bonus_movespeed"                                 "10 14 18 22 22 22"
+        "LinkedSpecialBonus"                              "special_bonus_unique_spectre_3"
       }
       "03"
       {
@@ -91,7 +91,7 @@
       "12"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "dagger_grace_period"                             "2.0"
+        "dagger_grace_period"                             "1.0"
       }
     }
   }

@@ -35,7 +35,7 @@
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_armor"                                     "6 6 6 6 12 18"
+        "bonus_armor"                                     "6"
       }
       "04"
       {
@@ -50,20 +50,13 @@
       "07"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bash_chance"                                     "10"
+        "ensnare_chance"                                  "14 16 18 20 22 24"
       }
       "08"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "bash_duration"                                   "0.8 1.2 1.6 2.0 2.0 2.0"
-      }
-      "09"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "bash_damage"                                     "20 30 40 50 100 150"
+        "ensnare_duration"                                "0.8 1.2 1.6 2.0 2.1 2.2"
       }
     }
   }
-
-
 }

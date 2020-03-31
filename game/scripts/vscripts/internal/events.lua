@@ -10,7 +10,6 @@ function CreateGameEvent (name) --luacheck: ignore CreateGameEvent
   return event.broadcast
 end
 
-
 -- The overall game state has changed
 OnCustomGameSetupEvent = CreateGameEvent('OnCustomGameSetup')
 OnHeroSelectionEvent = CreateGameEvent('OnHeroSelection')
@@ -39,7 +38,9 @@ function GameMode:_OnGameRulesStateChange(keys)
       for i=0,19 do
         if PlayerResource:IsValidPlayer(i) then
           local color = TEAM_COLORS[PlayerResource:GetTeam(i)]
-          PlayerResource:SetCustomPlayerColor(i, color[1], color[2], color[3])
+          if color then
+            PlayerResource:SetCustomPlayerColor(i, color[1], color[2], color[3])
+          end
         end
       end
     end
@@ -137,4 +138,12 @@ function GameMode:_OnConnectFull(keys)
   GameMode._reentrantCheck = true
   GameMode:OnConnectFull( keys )
   GameMode._reentrantCheck = false
+end
+
+OnItemUpdateEvent = CreateGameEvent('OnItemUpdate')
+function GameMode:OnItemUpdate( keys )
+  -- Debug:EnableDebugging()
+  -- DebugPrint('on item update!')
+  -- DebugPrintTable(keys)
+  OnItemUpdateEvent(keys)
 end

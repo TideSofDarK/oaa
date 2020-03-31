@@ -1,7 +1,7 @@
 "DOTAItems"
 {
   //=================================================================================================================
-  // Recipe: Boots of Travel 2
+  // Recipe: Greater Boots of Travel 2
   //=================================================================================================================
   "item_recipe_greater_travel_boots_2"
   {
@@ -10,7 +10,8 @@
     "ID"                                                  "3021"                            // unique ID number for this item.  Do not change this once established or it will invalidate collected stats.
     "BaseClass"                                           "item_datadriven"
     "Model"                                               "models/props_gameplay/recipe.mdl"
-    "AbilityTextureName"                                  "custom/recipe/recipe_farming_3"
+    "AbilityTextureName"                                  "custom/recipe/recipe_3"
+
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                                            "3500"
@@ -23,13 +24,15 @@
     "ItemRequirements"
     {
       "01"                                                "item_greater_travel_boots;item_upgrade_core_2"
-      "02"                                                "item_greater_travel_boots;item_upgrade_core_3"
-      "03"                                                "item_greater_travel_boots;item_upgrade_core_4"
+      "02"                                                "item_greater_tranquil_boots;item_upgrade_core_2"
+      "03"                                                "item_greater_phase_boots;item_upgrade_core_2"
+      "04"                                                "item_greater_power_treads;item_upgrade_core_2"
+      "05"                                                "item_greater_guardian_greaves;item_upgrade_core_2"
     }
   }
 
   //=================================================================================================================
-  // Boots of Travel 2
+  // Greater Boots of Travel 2
   //=================================================================================================================
   "item_greater_travel_boots_2"
   {
@@ -46,14 +49,14 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "45.0"
-    "AbilitySharedCooldown"                               "teleport"
-    "AbilityChannelTime"                                  "2.75 2.5 2.25 2"
+    "AbilityCooldown"                                     "40"
+    "AbilitySharedCooldown"                               "travel"
+    "AbilityChannelTime"                                  "2.5 2.2 1.9 1.6"
 
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "AbilityManaCost"                                     "75"
-    "ItemCost"                                            "5100"
+    "ItemCost"                                            "5975"
     "ItemShopTags"                                        "teleport;move_speed"
     "ItemQuality"                                         "common"
     "ItemAliases"                                         "bot 2;boots of travel 2;greater boots of travel 2"
@@ -71,28 +74,7 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "125 150 175 200"
-      }
-      "02"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "assist_percent"                                  "100 110 120 130"
-      }
-      "03"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "assist_radius"                                   "1300 1400 1500 1600"
-      }
-      "04"
-      {
-        // Stickiness of creep assist gold aura (the aura used internally to track creep kills of nearby allied heroes)
-        "var_type"                                        "FIELD_FLOAT"
-        "assist_stickiness"                               "0.1"
-      }
-      "05"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "creep_bounty_percent"                            "30"
+        "bonus_movement_speed"                            "35 40 45 50"
       }
     }
   }

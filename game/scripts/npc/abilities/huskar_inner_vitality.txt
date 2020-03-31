@@ -12,25 +12,26 @@
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_HERO"
     "SpellDispellableType"                                "SPELL_DISPELLABLE_YES"
+
     "MaxLevel"                                            "6"
+
     // Casting
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCastRange"                                    "800"
-    "AbilityCastPoint"                                    "0.3 0.3 0.3 0.3 0.3 0.3"
+    "AbilityCastPoint"                                    "0.3"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
     "AbilityCooldown"                                     "22 18 14 10 10 10"
-    "AbilityDuration"                                     "16 16 16 16 16 16"
+    "AbilityDuration"                                     "16"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityManaCost"                                     "170 170 170 170 170 170"
+    "AbilityManaCost"                                     "140 150 160 170 255 425"
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
     "AbilityModifierSupportValue"                         "0.0"  // already gets credit for the healing
-
 
     // Special
     //-------------------------------------------------------------------------------------------------------------
@@ -39,17 +40,17 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "heal"                                            "10"
+        "heal"                                            "12"
       }
       "02"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "attrib_bonus"                                    "0.06 0.08 0.10 0.12 0.14 0.18"
+        "attrib_bonus"                                    "0.05 0.1 0.15 0.20 0.24 0.28"
       }
       "03"
       {
         "var_type"                                        "FIELD_FLOAT"
-        "hurt_attrib_bonus"                               "0.22 0.3 0.38 0.46 0.54 0.7"
+        "hurt_attrib_bonus"                               "0.2 0.4 0.6 0.8 0.9 1.5"
       }
       "04"
       {

@@ -23,9 +23,7 @@
     "ItemResult"                    "item_black_king_bar_3"
     "ItemRequirements"
     {
-      "01"                        "item_black_king_bar_2;item_upgrade_core_2"
-      "02"                        "item_black_king_bar_2;item_upgrade_core_3"
-      "03"                        "item_black_king_bar_2;item_upgrade_core_4"
+      "01"                                                "item_black_king_bar_2;item_upgrade_core_2"
     }
   }
 
@@ -44,7 +42,7 @@
 
     // Stats
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"               "65"
+    "AbilityCooldown"               "70"
     "AbilitySharedCooldown"                               "avatar"
     "AbilityTextureName"            "custom/black_king_bar_3"
     "MaxUpgradeLevel"               "5"
@@ -67,7 +65,7 @@
       "01"
       {
         "var_type"              "FIELD_INTEGER"
-        "bonus_strength"        "10 20 30 40 55"
+        "bonus_strength"        "10 15 25 40 60"
       }
       "02"
       {
@@ -77,7 +75,7 @@
       "03"
       {
         "var_type"              "FIELD_FLOAT"
-        "duration"              "6.0"
+        "duration"              "6.0 6.5 7.0 7.5 8.0"
       }
       "05"
       {

@@ -7,18 +7,21 @@ function modifier_ward_invisibility_enemy:IsHidden()
   return true
 end
 
-function modifier_ward_invisibility:OnCreated()
+function modifier_ward_invisibility:OnCreated(keys)
   self.isInvis = true
   self.id = DoUniqueString("ward_")
+  self.isFindable = not keys.invisible
 end
-function modifier_ward_invisibility:OnRefresh()
+function modifier_ward_invisibility:OnRefresh(keys)
   self.isInvis = true
   self.id = DoUniqueString("ward_")
+  self.isFindable = not keys.invisible
 end
 
 function modifier_ward_invisibility:CheckState()
   return {
     [MODIFIER_STATE_INVISIBLE] = self.isInvis,
+    [MODIFIER_STATE_NO_UNIT_COLLISION] = true,
   }
 end
 
@@ -30,7 +33,7 @@ end
 -- aura stuff
 
 function modifier_ward_invisibility:IsAura()
-  return true
+  return self.isFindable
 end
 
 function modifier_ward_invisibility:GetAuraSearchType()

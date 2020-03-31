@@ -44,12 +44,12 @@ function furion_force_of_nature:OnSpellStart()
   local duration = self:GetSpecialValueFor( "duration" )
   local ability_level = self:GetLevel()
   -- Units to spawn for each ability level
-  local treant_names = {"npc_dota_furion_treant",
-                        "npc_dota_furion_treant",
-                        "npc_dota_furion_treant",
-                        "npc_dota_furion_treant",
-                        "npc_dota_furion_giant_treant",
-                        "npc_dota_furion_giant_treant_2"}
+  local treant_names = {"npc_dota_furion_treant_1",
+                        "npc_dota_furion_treant_2",
+                        "npc_dota_furion_treant_3",
+                        "npc_dota_furion_treant_4",
+                        "npc_dota_furion_treant_5",
+                        "npc_dota_furion_treant_6"}
 
   local trees = GridNav:GetAllTreesAroundPoint( target_point, area_of_effect, true )
   local tree_count = #trees
@@ -85,4 +85,37 @@ function furion_force_of_nature:OnSpellStart()
     end
   end
   EmitSoundOnLocationWithCaster( target_point, "Hero_Furion.ForceOfNature", caster )
+end
+
+function furion_force_of_nature:OnStolen(hSourceAbility)
+  local caster = self:GetCaster()
+  self:SetHidden(true) -- Decide later if it will unhide
+
+  if caster:FindAbilityByName("morphling_replicate") then
+    self:SetHidden(false) -- Unhide if its morphling
+    return
+  end
+
+  if not caster:FindAbilityByName("furion_wrath_of_nature_oaa") then
+    self:SetHidden(false) -- Unhide immediately if Rubick stole force of nature after ability that is not wrath of nature
+  end
+
+  local spell_steal_ability = caster:FindAbilityByName("rubick_spell_steal")
+  if not spell_steal_ability then
+    self:SetHidden(false)
+    return
+  end
+  local speal_steal_cast_range = spell_steal_ability:GetCastRange() or 1525
+  local spell_steal_speed = spell_steal_ability:GetSpecialValueFor("projectile_speed") or 900
+  local spell_steal_time = speal_steal_cast_range/spell_steal_speed+0.01
+  Timers:CreateTimer(spell_steal_time, function()
+    local wrath_of_nature_ability = caster:FindAbilityByName("furion_wrath_of_nature_oaa")
+    if wrath_of_nature_ability then
+      if wrath_of_nature_ability:IsHidden() or wrath_of_nature_ability:IsNull() then
+        self:SetHidden(false)
+      end
+    else
+      self:SetHidden(false)
+    end
+  end)
 end

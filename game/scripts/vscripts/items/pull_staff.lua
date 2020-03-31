@@ -22,6 +22,7 @@ function item_pull_staff:OnSpellStart()
   end
 
   local speed = self:GetSpecialValueFor("speed")
+  local maxDistance = self:GetSpecialValueFor("distance")
 
   local casterposition = caster:GetAbsOrigin()
   local targetposition = target:GetAbsOrigin()
@@ -30,10 +31,15 @@ function item_pull_staff:OnSpellStart()
   vVelocity.z = 0.0
 
   local flDistance = vVelocity:Length2D() - caster:GetPaddedCollisionRadius() - target:GetPaddedCollisionRadius()
+  if flDistance > maxDistance then
+    flDistance = maxDistance
+  end
   vVelocity = vVelocity:Normalized() * speed
 
-
-  target:Stop()
+  -- To prevent griefing allies that are channeling abilities
+  if target:GetTeamNumber() ~= caster:GetTeamNumber() then
+    target:Stop()
+  end
 
   local info = {
     Ability = self,

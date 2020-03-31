@@ -12,7 +12,7 @@
     "AbilityUnitTargetTeam"                               "DOTA_UNIT_TARGET_TEAM_CUSTOM"
     "AbilityUnitTargetType"                               "DOTA_UNIT_TARGET_CUSTOM"
     "AbilityUnitDamageType"                               "DAMAGE_TYPE_MAGICAL"
-    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_NO"
+    "SpellImmunityType"                                   "SPELL_IMMUNITY_ENEMIES_YES"
 
     "MaxLevel"                                            "6"
     "RequiredLevel"                                       "1"
@@ -20,12 +20,14 @@
 
     // Casting
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCastRange"                                    "800"
+    "AbilityCastRange"                                    "600 700 800 900 1000 1100"
     "AbilityCastPoint"                                    "0.3"
 
     // Time
     //-------------------------------------------------------------------------------------------------------------
-    "AbilityCooldown"                                     "16 12 8 4 4 4"
+    "AbilityCooldown"                                     "0.1"
+    "AbilityCharges"                                      "2"
+    "AbilityChargeRestoreTime"                            "25 20 15 10 9 8"
 
     // Cost
     //-------------------------------------------------------------------------------------------------------------
@@ -38,15 +40,14 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "tooltip_range"                                   "700"
-        "LinkedSpecialBonus"    "special_bonus_unique_riki_3"
+        "abilitycastrange"                                ""
+        "LinkedSpecialBonus"                              "special_bonus_unique_riki_3"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_damage"                                    "55 70 85 100 175 250"
+        "bonus_damage"                                    "25 50 75 100 250 400"
       }
     }
   }
-
 }

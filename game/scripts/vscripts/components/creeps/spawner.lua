@@ -29,14 +29,24 @@ function CreepCamps:Init ()
   self.CampPRDCounters = {}
   self.firstSpawn = true
   if not SKIP_TEAM_SETUP then
-    Timers:CreateTimer(INITIAL_CREEP_DELAY, Dynamic_Wrap(self, 'CreepSpawnTimer'), self)
+    HudTimer:At(INITIAL_CREEP_DELAY, partial(self.CreepSpawnTimer, self))
   else
     Timers:CreateTimer(Dynamic_Wrap(self, 'CreepSpawnTimer'), self)
   end
 
   Minimap:InitializeCampIcons()
 
-  ChatCommand:LinkCommand("-spawncamps", Dynamic_Wrap(self, 'CreepSpawnTimer'), self)
+  ChatCommand:LinkDevCommand("-spawncamps", Dynamic_Wrap(self, 'CreepSpawnTimer'), self)
+end
+
+function CreepCamps:GetState ()
+  return {
+    power = CreepPowerLevel
+  }
+end
+
+function CreepCamps:LoadState (state)
+  self:SetPowerLevel(state.power)
 end
 
 function CreepCamps:SetPowerLevel (powerLevel)
@@ -57,10 +67,9 @@ function CreepCamps:CreepSpawnTimer ()
   Minimap:Respawn()
 
   if self.firstSpawn then
+    HudTimer:OnThe(CREEP_SPAWN_INTERVAL, partial(self.CreepSpawnTimer, self))
     self.firstSpawn = false
-    return CREEP_SPAWN_INTERVAL - INITIAL_CREEP_DELAY
   end
-  return CREEP_SPAWN_INTERVAL
 end
 
 function CreepCamps:UpgradeCreeps ()
@@ -98,7 +107,7 @@ function CreepCamps:SpawnCreepInCamp (location, creepProperties, maximumUnits)
     -- DebugPrint('[creeps/spawner] Too many creeps in camp, not spawning more')
     for _,unit in pairs(units) do
       local unitProperties = self:GetCreepProperties(unit)
-      local distributedScale = 1.0 / maximumUnits
+      local distributedScale = 1.0 / #units
 
       unitProperties = self:AddCreepPropertiesWithScale(unitProperties, 1.0, creepProperties, distributedScale)
       self:SetCreepPropertiesOnHandle(unit, unitProperties)

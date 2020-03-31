@@ -10,7 +10,7 @@
     "ID"                                                  "3011"                            // unique ID
     "BaseClass"                                           "item_datadriven"
     "Model"                                               "models/props_gameplay/recipe.mdl"
-    "AbilityTextureName"                                  "custom/recipe/recipe_farming_3"
+    "AbilityTextureName"                                  "custom/recipe/recipe_3"
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
     "ItemCost"                                            "3500"
@@ -23,8 +23,10 @@
     "ItemRequirements"
     {
       "01"                                                "item_greater_power_treads;item_upgrade_core_2"
-      "02"                                                "item_greater_power_treads;item_upgrade_core_3"
-      "03"                                                "item_greater_power_treads;item_upgrade_core_4"
+      "02"                                                "item_greater_phase_boots;item_upgrade_core_2"
+      "03"                                                "item_greater_tranquil_boots;item_upgrade_core_2"
+      "04"                                                "item_greater_travel_boots;item_upgrade_core_2"
+      "05"                                                "item_greater_guardian_greaves;item_upgrade_core_2"
     }
   }
 
@@ -39,10 +41,11 @@
     "BaseClass"                                           "item_lua"
     "ScriptFile"                                          "items/farming/greater_power_treads.lua"
     "AbilityBehavior"                                     "DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+    "AbilityUnitDamageType"                               "DAMAGE_TYPE_PURE"
     "AbilityTextureName"                                  "custom/greater_power_treads_2"
     // Item Info
     //-------------------------------------------------------------------------------------------------------------
-    "ItemCost"                                            "5050"
+    "ItemCost"                                            "5975"
     "ItemShopTags"                                        "attack_speed;move_speed;int;agi;str"
     "ItemQuality"                                         "common"
     "ItemAliases"                                         "greater power treads 2;power treads 2;treads 2"
@@ -58,17 +61,17 @@
       "01"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_movement_speed"                            "50 55 60 65"
+        "bonus_movement_speed"                            "20 25 30 35"
       }
       "02"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_stat"                                      "15 24 36 54"
+        "bonus_stat"                                      "15 25 40 60"
       }
       "03"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "bonus_attack_speed"                              "30 35 40 45"
+        "bonus_attack_speed"                              "30 40 50 60"
       }
       "04"
       {
@@ -78,19 +81,8 @@
       "05"
       {
         "var_type"                                        "FIELD_INTEGER"
-        "split_radius"                                    "300"
-      }
-      "06"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "split_damage"                                    "40 50 60 70"
-      }
-      "07"
-      {
-        "var_type"                                        "FIELD_INTEGER"
-        "split_damage_ranged"                             "40 50 60 70"
+        "all_stats"                                       "0"
       }
     }
   }
-
 }
